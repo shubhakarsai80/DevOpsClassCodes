@@ -18,7 +18,7 @@ pipeline{
         }
         stage("qa"){
             steps{
-                sh "mvn sonarqube:sonarqube"
+                sh "mvn sonarQube:sonarQube"
                 recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [sonarQube()]
             }
         }
