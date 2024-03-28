@@ -18,8 +18,8 @@ pipeline{
         }
         stage("qa"){
             steps{
-                sh "mvn sonarQube:sonarQube"
-                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [sonarQube()]
+                sh "mvn checkstyle:checkstyle"
+                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [checkStyle()]
             }
         }
         stage("package the code"){
