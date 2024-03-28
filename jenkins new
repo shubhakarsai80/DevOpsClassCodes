@@ -1,0 +1,31 @@
+pipeline{
+    agent any
+    stages{
+        stage("checkout from the github"){
+            steps{
+                git url:"https://github.com/shubhakarsai80/cicdakshat.git"
+            }
+        }
+        stage("compile the code"){
+            steps{
+                sh "mvn compile"
+            }
+        }
+        stage("test the code"){
+            steps{
+                sh "mvn test"
+            }
+        }
+        stage("qa"){
+            steps{
+                sh "mvn sonarqube:sonarqube"
+                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [sonarQube()]
+            }
+        }
+        stage("package the code"){
+            steps{
+                sh "mvn package"
+            }
+        }
+    }
+}
