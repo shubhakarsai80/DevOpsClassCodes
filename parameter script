@@ -1,0 +1,12 @@
+properties([parameters([choice(choices: ['master ', 'branch1', 'branch2'], name: 'branch')])])
+pipeline{
+    agent any
+    stages{
+        stage("checkout"){
+            steps{
+                echo "pulling from $parms.branch"
+                git url:"https://github.com/shubhakarsai80/DevOpsClassCodes.git",branch: "$parms.branch"
+            }
+        }
+    }
+}
