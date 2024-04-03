@@ -1,0 +1,16 @@
+ pipeline {
+ agent any
+ stages{
+ stage("compile code with sai"){
+ steps{
+ sh "mvn compile"
+ }
+ }
+ }post{
+               success{
+                emailext body: 'email sent from jenkins', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'shubhakarsai80@gmail.com'   
+                }
+                failure{
+                    emailext body: 'email sent from jenkins', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'shubhakarsai80@gmail.com'
+                }
+                }
